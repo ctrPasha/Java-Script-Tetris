@@ -3,7 +3,7 @@ const context = board.getContext('2d');
 
 const COLS = 10;
 const ROWS = 20;
-const CELL_SIZE = 20;
+const CELL_SIZE = 30;
 
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
