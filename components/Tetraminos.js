@@ -37,7 +37,7 @@ const TETRAMINOS = {
   ],
 };
 
-class Tetraminos {
+class Shapes {
   constructor(context) {
     this.context = context;
     //this.tetraminos = TETRAMINOS[];
