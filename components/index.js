@@ -21,6 +21,9 @@ function play() {
 
   // Renders the cells/grid onto the screen when the start button is pressed
   drawGrid();
+
+
+
 }
 
 
