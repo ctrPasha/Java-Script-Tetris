@@ -32,6 +32,7 @@ class Board {
   
 };
 
+// 1. Print Blocks 2. Print Grid Lines
 const drawGrid = () => {
   context.strokeStyle = "white";
   context.lineWidth = 0.075;

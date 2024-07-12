@@ -54,6 +54,13 @@ const play = () => {
   }
   drawGrid();
 
-  //console.table(board.grid);
+  console.table(board.grid);
   console.table(board.colorGrid);
+
+
+  //We can move this to the top later. 
+  //Create a new varible 
+  let shapes = new Shapes();
+  console.log(shapes.getShape('J'));
+
 };
