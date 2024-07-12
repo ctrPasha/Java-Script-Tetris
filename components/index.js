@@ -1,37 +1,33 @@
 const canvas = document.getElementById("board");
-const context = board.getContext('2d');
-
+const context = canvas.getContext("2d");
 const COLS = 10;
 const ROWS = 20;
 const CELL_SIZE = 30;
-
+let board;
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
-context.canvas.height = ROWS * CELL_SIZE;  
+context.canvas.height = ROWS * CELL_SIZE;
 
 // scaling the blocks
 context.scale(CELL_SIZE, CELL_SIZE);
 
 //Simple RNG: Intput maxRange
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
+const getRandomInt = (max) => Math.floor(Math.random() * max);
 
-
-function play() {
+const play = () => {
   let playBtn = document.getElementById("play-btn");
   board = new Board(context);
-    
-  // On click, the button will disappear 
-  playBtn.style.display = 'none';
+
+  // On click, the button will disappear
+  playBtn.style.display = "none";
 
   // Renders the cells/grid onto the screen when the start button is pressed
-  drawGrid();
+  //drawGrid();
 
   // Fills random colors in the grid.
   for (let i = 0; i < COLS; i++) {
     for (let j = 0; j < ROWS; j++) {
-      let tempColor = null;
+      let randomColor;
       let randomInt = getRandomInt(5);
 
       switch(randomInt) {
@@ -56,9 +52,8 @@ function play() {
       board.setValue(i, j, 1, randomColor);
     }
   }
-
   drawGrid();
 
-  console.table(board.grid);
+  //console.table(board.grid);
   console.table(board.colorGrid);
-}
+};

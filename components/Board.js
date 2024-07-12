@@ -25,7 +25,7 @@ class Board {
   }
 
   //Method to set value and color for a specific block
-  setValue(row, col, value, color) {
+  setValue(col, row, value, color) {
     this.grid[row][col] = value;
     this.colorGrid[row][col] = color;
   }
@@ -37,15 +37,14 @@ const drawGrid = () => {
   context.lineWidth = 0.075;
 
   // The loop prints the board from left-right | top-bottom
-  for (let i = 0; i < COLS; i++) {
-    for (let j = 0; j < ROWS; j++) {
+  for (let col = 0; col < COLS; col++) {
+    for (let row = 0; row < ROWS; row++) {
       
-      const color = board.colorGrid[i][j]; // Read the color array
+      const color = board.colorGrid[row][col]; // Read the color array
       context.fillStyle = color;
 
       // Fills a rectangle starting at i, j and to 1, 1
-      context.fillRect(i, j, 1, 1);
-
+      context.fillRect(col, row, 1, 1);
     } 
   }
 
@@ -64,6 +63,4 @@ const drawGrid = () => {
     context.lineTo(COLS, j);
     context.stroke();
   }
-  
-
 }
