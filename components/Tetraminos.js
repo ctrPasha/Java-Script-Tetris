@@ -11,9 +11,9 @@ const BLOCKS = {
     [0, 0, 0]
   ],
   L: [
-    [0, 0, 0],
     [1, 1, 1],
-    [1, 0, 0]
+    [1, 0, 0],
+    [0, 0, 0]
   ],
   O: [
     [1, 1, 0],
@@ -50,13 +50,10 @@ const COLORS = {
 class Shapes {
   constructor(context) {
     this.context = context;
-    this.color = 'blue';  
-    /*(this.block = [  
-      [1, 0, 0],   
-      [1, 1, 1],   
-      [0, 0, 0]  
-    ];*/
+    //this.color = 'blue';  
+    
     this.tetraminos = BLOCKS;
+
     // Starting position.  
     this.x = 3;  
     this.y = 0;  
@@ -72,7 +69,7 @@ class Shapes {
           this.context.fillRect(this.x + x, this.y + y, 1, 1);
           board.setValue(this.x + x, this.y + y, value, this.randomShape.color);
         }
-      })
+      });
     });
   }
 
@@ -93,5 +90,4 @@ class Shapes {
      color: randomColor
     };
   }
-
 };

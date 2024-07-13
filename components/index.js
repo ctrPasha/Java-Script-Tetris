@@ -5,6 +5,23 @@ const ROWS = 20;
 const CELL_SIZE = 30;
 let board;
 
+const KEY = {  
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40
+}; 
+Object.freeze(KEY);
+
+const KEY2 = {
+  LEFT: 65,
+  UP: 87,
+  RIGHT: 68,
+  DOWN: 83
+};
+Object.freeze(KEY2);
+
+
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
 context.canvas.height = ROWS * CELL_SIZE;
@@ -23,7 +40,7 @@ const play = () => {
   draw();
 
   console.table(board.grid);
-  console.table(board.colorGrid);
+  //console.table(board.colorGrid);
 };
 
 // This function will draw a random shape and grid lines
