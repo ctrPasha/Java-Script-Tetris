@@ -25,6 +25,7 @@ const play = () => {
   //drawGrid();
 
   // Fills random colors in the grid.
+  /*
   for (let i = 0; i < COLS; i++) {
     for (let j = 0; j < ROWS; j++) {
       let randomColor;
@@ -52,15 +53,22 @@ const play = () => {
       board.setValue(i, j, 1, randomColor);
     }
   }
+  */
   drawGrid();
-
+  draw();
   console.table(board.grid);
   console.table(board.colorGrid);
 
-
   //We can move this to the top later. 
   //Create a new varible 
-  let shapes = new Shapes();
-  console.log(shapes.getShape('J'));
-
+  //let shapes = new Shapes();
+  //console.log(shapes.getShape('J'));
 };
+
+const draw = () => {
+  const { width, height } = context.canvas; 
+  context.clearRect(0, 0, width, height);
+
+  board.block.draw();
+  drawGrid();
+}

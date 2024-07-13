@@ -3,6 +3,7 @@ class Board {
     this.context = context;
     this.grid = this.getEmptyBoard();
     this.colorGrid = this.getEmptyColorGrid();
+    this.block = new Shapes(context);
   }
   /* Array.from Creates an array with Rows number of elements(in this case 20 cells)
     The callback creates an array for the columns which then returns a 10x20 grid.
