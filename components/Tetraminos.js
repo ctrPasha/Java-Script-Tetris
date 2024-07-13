@@ -37,35 +37,61 @@ const BLOCKS = {
   ],
 };
 
+const COLORS = {
+  0: "cyan",
+  1: "orange",
+  2: "blue",
+  3: "yellow",
+  4: "green",
+  5: "red",
+  6: "purple",
+};
 
 class Shapes {
   constructor(context) {
     this.context = context;
     this.color = 'blue';  
-    this.block = [  
+    /*(this.block = [  
       [1, 0, 0],   
       [1, 1, 1],   
       [0, 0, 0]  
-    ];
+    ];*/
     this.tetraminos = BLOCKS;
     // Starting position.  
     this.x = 3;  
     this.y = 0;  
+    this.randomShape = this.getRandomShape();
   }
 
+  // UPDATED FUNCTION FOR RANDOM BLOCKS AND COLORS (DELETE COMMENT)
   draw() {
     this.context.fillStyle = this.color;
-    this.block.forEach((row, y) => {
+    this.randomShape.shape.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value > 0) {
           this.context.fillRect(this.x + x, this.y + y, 1, 1);
-          board.setValue(this.x + x, this.y + y, value, this.color);
+          board.setValue(this.x + x, this.y + y, value, this.randomShape.color);
         }
       })
     });
   }
 
+  // Returns general shape based off of key.
+  // This is here for testing and not currently used.
   getShape(key) {
     return this.tetraminos[key];
   }
+
+  // Returns random shape array
+  // Object.keys(BLOCKS) returns the array of the KEYS in BLOCKS i.e., "I", "O", "S"
+  getRandomShape() {
+    let keys = Object.keys(BLOCKS);
+    let randomKey = keys[Math.floor(Math.random() * keys.length)];
+    let randomColor = COLORS[keys.indexOf(randomKey)];
+    return {
+     shape: BLOCKS[randomKey],
+     color: randomColor
+    };
+  }
+
 };
