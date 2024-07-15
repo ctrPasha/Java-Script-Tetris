@@ -18,7 +18,7 @@ class Board {
     );
   }
 
-  //Creates an array with entries of null
+  //Creates an array with entries of "black"
   getEmptyColorGrid() {
     return Array.from(
       {length: ROWS}, () => Array(COLS).fill("black")
@@ -30,25 +30,24 @@ class Board {
     this.grid[row][col] = value;
     this.colorGrid[row][col] = color;
   }
-  
 };
 
 // 1. Print Blocks 2. Print Grid Lines
 const drawGrid = () => {
   context.strokeStyle = "white";
   context.lineWidth = 0.075;
-
+  
   // The loop prints the board from left-right | top-bottom
   for (let col = 0; col < COLS; col++) {
     for (let row = 0; row < ROWS; row++) {
-      
       const color = board.colorGrid[row][col]; // Read the color array
       context.fillStyle = color;
 
-      // Fills a rectangle starting at i, j and to 1, 1
+      // Fills a rectangle starting at i, j and to 1, 1 for each 1 entry
       context.fillRect(col, row, 1, 1);
     } 
   }
+    
 
   // Draws Vertical Lines
   for (let i = 0; i <= COLS; i++) {

@@ -42,6 +42,7 @@ context.canvas.height = ROWS * CELL_SIZE;
 context.scale(CELL_SIZE, CELL_SIZE);
 
 let board;
+let block;
 
 const play = () => {
   let playBtn = document.getElementById("play-btn");
@@ -50,12 +51,10 @@ const play = () => {
   // On click, the button will disappear
   playBtn.style.display = "none";
 
-  // Draws random block and gridline
+  // Draws a random Block
   draw();
 
   addEventListener();
-  console.table(board.grid);
-  //console.table(board.colorGrid);
 };
 
 // This function will draw a random shape and grid lines
@@ -66,7 +65,6 @@ const draw = () => {
 
   //This is what calls the block and color generation.
   board.block.draw();
-  drawGrid();
 };
 
 const handleKeyPress = (event) => {
@@ -74,7 +72,8 @@ const handleKeyPress = (event) => {
     let b = keyMoves[event.keyCode](board.block);
     board.block.clear();
     board.block.move(b);
-    draw(); // Redraw the canvas after moving the block
+    drawGrid();  // Redraw the grid
+    board.block.draw();  // Draw the block at the new position
   }
 };
 

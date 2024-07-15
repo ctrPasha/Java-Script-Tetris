@@ -50,8 +50,6 @@ const COLORS = {
 class Shapes {
   constructor(context) {
     this.context = context;
-    //this.color = 'blue';  
-    
     this.tetraminos = BLOCKS;
 
     // Starting position.  
@@ -60,7 +58,8 @@ class Shapes {
     this.randomShape = this.getRandomShape();
   }
 
-  // UPDATED FUNCTION FOR RANDOM BLOCKS AND COLORS (DELETE COMMENT)
+  // Updates color / grid array with new block.
+  // Calls drawGrid() to update board
   draw() {
     this.context.fillStyle = this.color;
     this.randomShape.shape.forEach((row, y) => {
@@ -68,6 +67,7 @@ class Shapes {
         if (value > 0) {
           this.context.fillRect(this.x + x, this.y + y, 1, 1);
           board.setValue(this.x + x, this.y + y, value, this.randomShape.color);
+          drawGrid();
         }
       });
     });
@@ -87,6 +87,7 @@ class Shapes {
     this.x = b.x;
     this.y = b.y;
   }
+
   // Returns general shape based off of key.
   // This is here for testing and not currently used.
   getShape(key) {
@@ -104,4 +105,15 @@ class Shapes {
      color: randomColor
     };
   }
+
+  rightTransposition() {
+    //let arrayTranpose = randomShape.shape;
+    //console.table(arrayTranpose);
+
+  }
+
+  leftTransposition() {
+
+  }
+
 };
