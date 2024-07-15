@@ -73,6 +73,20 @@ class Shapes {
     });
   }
 
+  clear() {
+    this.randomShape.shape.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value > 0) {
+          board.setValue(this.x + x, this.y + y, 0, "black");
+        }
+      });
+    });
+  }
+  
+  move(b) {
+    this.x = b.x;
+    this.y = b.y;
+  }
   // Returns general shape based off of key.
   // This is here for testing and not currently used.
   getShape(key) {
