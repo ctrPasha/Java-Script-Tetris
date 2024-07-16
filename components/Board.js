@@ -30,6 +30,23 @@ class Board {
     this.grid[row][col] = value;
     this.colorGrid[row][col] = color;
   }
+
+  valid(b) {
+    return b.randomShape.shape.every((row, y) => {
+      return row.every((value, x) => 
+        value === 0 || 
+        this.isInsideWalls(b.x + x, b.y + y)
+      );
+    });
+  }
+
+  isInsideWalls(x, y) {
+    return (
+      x >= 0 && // left wall
+      x < COLS && // right wall
+      y < ROWS // bottom wall 
+    );
+  }
 };
 
 // 1. Print Blocks 2. Print Grid Lines
