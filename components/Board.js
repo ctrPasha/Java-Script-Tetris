@@ -37,11 +37,8 @@ class Board {
   if its within the boards boundries.
   */
   valid(b) {
-     
     return b.randomShape.shape.every((row, y) => {
-      
       return row.every((value, x) => 
-        
         value === 0 || 
         this.isInsideWalls(b.x + x, b.y + y)
       );
