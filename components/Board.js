@@ -31,9 +31,17 @@ class Board {
     this.colorGrid[row][col] = color;
   }
 
+  /*
+  Function loops over each row in the shape, then loops over each cell in the row
+  If the cell is parrt of the shape (the value > 0), then check
+  if its within the boards boundries.
+  */
   valid(b) {
+     // Loops over each row in the shape
     return b.randomShape.shape.every((row, y) => {
+      // Loops over each cell in the row
       return row.every((value, x) => 
+        // If the cell is part of the shape (value > 0), then check if its within the boards boundries 
         value === 0 || 
         this.isInsideWalls(b.x + x, b.y + y)
       );
