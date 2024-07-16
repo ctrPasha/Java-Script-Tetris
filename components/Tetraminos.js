@@ -85,6 +85,7 @@ class Shapes {
   move(b) {
     this.x = b.x;
     this.y = b.y;
+    this.randomShape.shape = b.randomShape.shape;
   }
 
   // Returns general shape based off of key.
@@ -104,7 +105,7 @@ class Shapes {
      color: randomColor
     };
   }
-
+  /*
   rightTransposition() {
     let shape = this.randomShape.shape;
     let n = shape.length;
@@ -118,6 +119,6 @@ class Shapes {
 
     this.randomShape.shape = transposed;
     console.table(this.randomShape.shape);
-  }
-
+  }*/
+  
 };

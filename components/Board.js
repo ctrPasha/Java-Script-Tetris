@@ -31,6 +31,23 @@ class Board {
     this.colorGrid[row][col] = color;
   }
 
+  rotate(block) {
+    let b = JSON.parse(JSON.stringify(block));
+
+    for (let y = 0; y < b.randomShape.shape.length; y++) {
+      for (let x = 0; x < y; x++) {
+        [b.randomShape.shape[x][y], b.randomShape.shape[y][x]] = 
+        [b.randomShape.shape[y][x], b.randomShape.shape[x][y]];
+      }
+    }
+    b.randomShape.shape.forEach(row => row.reverse());
+
+    if (this.valid(b)) {
+      return b;
+    }
+    return block;  // return the original block if the rotation is not valid
+  }
+
   /*
   Function loops over each row in the shape, then loops over each cell in the row
   If the cell is parrt of the shape (the value > 0), then check

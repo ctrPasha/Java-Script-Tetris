@@ -13,7 +13,7 @@ const KEY = {
 };
 Object.freeze(KEY);
 
-// WASD values
+/* WASD values
 const KEY2 = {
   LEFT: 65,
   UP: 87,
@@ -21,6 +21,7 @@ const KEY2 = {
   DOWN: 83,
 };
 Object.freeze(KEY2);
+*/
 
 /* 
 To recieve the new state from the changed coordinates we use a spread operator ex: (...)
@@ -32,6 +33,7 @@ const keyMoves = {
   [KEY.LEFT]: (b) => ({ ...b, x: b.x - 1 }),
   [KEY.RIGHT]: (b) => ({ ...b, x: b.x + 1 }),
   [KEY.DOWN]: (b) => ({ ...b, y: b.y + 1 }),
+  [KEY.UP]: (b) => board.rotate(b)
 };
 
 // Setting canvas dimensions
@@ -70,12 +72,7 @@ const draw = () => {
 };
 
 const handleKeyPress = (event) => {
-  if (event.keyCode === KEY.UP) {
-    board.block.clear();
-    board.block.rightTransposition();
-    board.block.draw();
-  }
-
+  
   if (keyMoves[event.keyCode]) {
     let b = keyMoves[event.keyCode](board.block);
     board.block.clear();
