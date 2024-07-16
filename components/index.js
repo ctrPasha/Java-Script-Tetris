@@ -55,6 +55,8 @@ const play = () => {
   draw();
 
   addEventListener();
+
+  console.table(board.grid);
 };
 
 // This function will draw a random shape and grid lines
@@ -77,7 +79,12 @@ const handleKeyPress = (event) => {
   if (keyMoves[event.keyCode]) {
     let b = keyMoves[event.keyCode](board.block);
     board.block.clear();
-    board.block.move(b);
+
+    if (board.valid(b)) {
+      board.block.move(b);
+    }
+    drawGrid();  // Redraw the grid
+
     board.block.draw();  // Draw the block at the new position
   }
 
