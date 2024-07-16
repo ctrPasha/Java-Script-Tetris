@@ -16,9 +16,8 @@ const BLOCKS = {
     [0, 0, 0]
   ],
   O: [
-    [1, 1, 0],
-    [1, 1, 0],
-    [0, 0, 0]
+    [1, 1],
+    [1, 1]
   ],
   S: [
     [1, 0, 0],
@@ -107,13 +106,18 @@ class Shapes {
   }
 
   rightTransposition() {
-    //let arrayTranpose = randomShape.shape;
-    //console.table(arrayTranpose);
+    let shape = this.randomShape.shape;
+    let n = shape.length;
+    let transposed = Array.from({length: n}, () => Array(n).fill(0));
 
-  }
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        transposed[j][n - 1 - i] = shape[i][j];
+      }
+    }
 
-  leftTransposition() {
-
+    this.randomShape.shape = transposed;
+    console.table(this.randomShape.shape);
   }
 
 };
