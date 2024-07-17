@@ -66,6 +66,7 @@ class Shapes {
         if (value > 0) {
           this.context.fillRect(this.x + x, this.y + y, 1, 1);
           board.setValue(this.x + x, this.y + y, value, this.randomShape.color);
+          drawBlocks();
           drawGrid();
         }
       });
