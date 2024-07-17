@@ -28,7 +28,8 @@
   box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
   font-size: 1em;
   cursor: pointer;
- 
+  color: white;
+  background-color: green;
 }
 
 
@@ -42,8 +43,8 @@
 
 .container {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center; 
+  align-items: center; 
   position: absolute;
   top: 0;
   bottom: 10em;
