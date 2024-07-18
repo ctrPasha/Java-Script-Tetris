@@ -69,9 +69,78 @@ class Board {
       y < ROWS // bottom wall 
     );
   }
+  
+  hardDrop = (block) => {
+    let b = JSON.parse(JSON.stringify(block));
+    let highestY = 20;
+    let blockHeight = 0;
+    let blockLength = 0;
+    let currentDisplacement = 0;
+
+    // Finds the Block Height
+    for (let y = 0; y < block.randomShape.shape.length; y++) {
+      if (block.randomShape.shape[y].some(value => value !== 0)) {
+        blockHeight++;
+      }
+    }
+
+
+    // Finds the Block Length
+    for (let x = 0; x < block.randomShape.shape[0].length; x++) {
+      if (block.randomShape.shape.some(row => row[x] !== 0)) {
+        blockLength++;
+      }
+    }
+  
+    // Some arrays have blank columns towards the left of the block e.g., I & Z block
+    let blockDisplacement = blockLength;
+    currentDisplacement = 0;
+    for (let x = 0; x < blockLength - 1; x++) {
+        for (let y = 0; y < blockHeight - 1; y++) {
+            if (block.randomShape.shape[y][x] === 0) {
+                currentDisplacement++;
+            } else {
+                break; 
+            }
+        }
+        // Update blockDisplacement to the minimum displacement found
+        if (currentDisplacement <= blockDisplacement) {
+            blockDisplacement = currentDisplacement;
+        }
+    }
+
+    console.log("Block Length:", blockLength);
+    console.log("Block Height:", blockHeight);
+    console.log("Current Block Pos", board.block.x); 
+    console.log("Block Displacement:", blockDisplacement);
+
+    for (let x = board.block.x + blockDisplacement; x < board.block.x + blockLength; x++) {
+      for (let y = 0; y < ROWS; y++) {
+        if (board.grid[y][x] === 1 && y < highestY) {
+          highestY = y;
+        }
+      }
+    }
+
+    console.log("Inital Height Valid:", highestY);
+    highestY = 20 - blockHeight;
+    console.log("Highest Height Valid:", highestY);
+
+
+    block.clear();
+    block.move({...b, y: highestY});
+    block.draw();
+
+    // Create and draw a new block
+    this.block = new Shapes(this.context);
+    this.block.draw();
+  }
+  
+
+
 };
 
-// 1. Print Blocks 2. Print Grid Lines
+// Print Grid Lines
 const drawGrid = () => {
   context.strokeStyle = "white";
   context.lineWidth = 0.075;
@@ -93,6 +162,7 @@ const drawGrid = () => {
   }
 }
 
+// Print Blocks
 const drawBlocks = () => {
   // The loop prints the board from left-right | top-bottom
   for (let col = 0; col < COLS; col++) {

@@ -6,10 +6,11 @@ const CELL_SIZE = 30;
 
 // Arrow key values
 const KEY = {
+  SPACE: 32,
   LEFT: 37,
   UP: 38,
   RIGHT: 39,
-  DOWN: 40,
+  DOWN: 40
 };
 Object.freeze(KEY);
 
@@ -33,7 +34,8 @@ const keyMoves = {
   [KEY.LEFT]: (b) => ({ ...b, x: b.x - 1 }),
   [KEY.RIGHT]: (b) => ({ ...b, x: b.x + 1 }),
   [KEY.DOWN]: (b) => ({ ...b, y: b.y + 1 }),
-  [KEY.UP]: (b) => board.rotate(b)
+  [KEY.UP]: (b) => board.rotate(b),
+  [KEY.SPACE]: (b) => board.hardDrop(b)
 };
 
 // Setting canvas dimensions
@@ -57,7 +59,7 @@ const play = () => {
   draw();
 
   addEventListener();
-
+  
   console.table(board.grid);
 };
 
@@ -77,13 +79,18 @@ const handleKeyPress = (event) => {
     let b = keyMoves[event.keyCode](board.block);
     board.block.clear();
 
+  if (event.keyCode != 32){
     if (board.valid(b)) {
       board.block.move(b);
     }
-    drawGrid();  // Redraw the grid
-
     board.block.draw();  // Draw the block at the new position
   }
+
+  if (event.keyCode === 39) {
+    console.log("This is the current x pos:", board.block.x);
+  }
+
+}
 
 };
 
