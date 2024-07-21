@@ -28,7 +28,7 @@ class Board {
 
     return b; 
   }
-
+ 
   /*
   Function loops over each row in the shape, then loops over each cell in the row
   If the cell is parrt of the shape (the value > 0), then check

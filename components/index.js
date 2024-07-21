@@ -14,7 +14,7 @@ context.scale(CELL_SIZE, CELL_SIZE);
 
 let board;
 
-
+ 
 const play = () => {
   board = new Board(context); 
  
