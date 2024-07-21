@@ -25,6 +25,37 @@ class Board {
       }
     }
     b.shape.forEach(row => row.reverse());
+    
+    // isValid has to be declared here else won't work
+    // isValid returns false if block array is OOB
+    let isValid = this.valid(b);
+    if (!isValid) {
+      let outOfBoundsMin = 10;
+      let outOfBoundsMax = 0;
+
+      // Checks for min / max X coordinate of the OOB array
+      b.shape.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value !== 0 && !this.isInsideWalls(b.x + x, b.y + y)) {
+            // Update min and max values based on the current x value
+            if (outOfBoundsMin > b.x + x) {
+              outOfBoundsMin = b.x + x;
+            }
+            if (outOfBoundsMax < b.x + x) {
+              outOfBoundsMax = b.x + x;
+            }
+          }
+        });
+      });
+
+      //Shifts over the new rotated block by the emount of spaces OOB.
+      if (outOfBoundsMin <= 0) {
+        b.x = b.x + outOfBoundsMin * -1;
+      } else {
+        outOfBoundsMax = outOfBoundsMax - 9;
+        b.x = b.x - outOfBoundsMax;
+      }
+    }
 
     return b; 
   }
