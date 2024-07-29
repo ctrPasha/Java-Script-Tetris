@@ -119,8 +119,9 @@ class Board {
     this.grid.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value > 0) {
+          const margin = 0.05;
           this.context.fillStyle = COLORS[value - 1];
-          this.context.fillRect(x, y, 1, 1);
+          this.context.fillRect(x + margin, y + margin, 1 - 2 * margin, 1 - 2 * margin);
         }
       });
     });
@@ -135,14 +136,6 @@ class Board {
         this.grid.unshift(Array(COLS).fill(0));
       }
     }
-
-    /*
-    this.grid.forEach((row, y) => {
-      if (row.every((value) => value > 0)) {
-        this.grid.splice(y, 1);
-        this.grid.unshift(Array(COLS).fill(0));
-      }
-    });*/
   }
 }
 

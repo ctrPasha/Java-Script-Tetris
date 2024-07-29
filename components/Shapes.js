@@ -18,7 +18,8 @@ class Shapes {
     this.shape.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value > 0) {
-          this.context.fillRect(this.x + x, this.y + y, 1, 1);
+          const margin = 0.05;
+          this.context.fillRect(this.x + x + margin, this.y + y + margin, 1 - 2 * margin, 1 - 2 * margin);
         }
       });
     });
