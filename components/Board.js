@@ -71,7 +71,9 @@ class Board {
       return row.every((value, dx) => {
         let x = b.x + dx;
         let y = b.y + dy;
-        return value === 0 || (this.isInsideWalls(x, y) && this.notOccupied(x, y));
+        return (
+          value === 0 || (this.isInsideWalls(x, y) && this.notOccupied(x, y))
+        );
       });
     });
   }
@@ -102,11 +104,15 @@ class Board {
       this.piece.move(b);
     } else {
       this.rest();
+      this.clearLines();
+
+      if (this.piece.y === 0) {
+        return false;
+      }
       this.piece = new Shapes(this.context);
     }
     console.table(this.grid);
-
-
+    return true;
   }
   // Draws the board with the tetraminos that land on the bottom
   draw() {
@@ -120,25 +126,14 @@ class Board {
     });
   }
 
-  clearLines = () => {    
+  clearLines() {
     // Scans and deletes the row
-    for (let y = 0; y < ROWS; y++) {
-      for (let x = 0; x < COLS; x++ ) {
-        let completedLine = this.grid[y].every(value => value >= 1);
-        if (completedLine) {
-          for (let x = 0; x < COLS; x++) {
-            this.grid[y][x] = 0; // Set each element in the row to 0
-          }
-          // Shifts the entire board down by one
-          for (let y = ROWS - 1; y > 0; y--) {
-            for (let x = 0; x < COLS; x++) {
-              this.grid[y][x] = this.grid[y - 1][x];
-            }
-          }
-
-        }
+    this.grid.forEach((row, y) => {
+      if (row.every((value) => value > 0)) {
+        this.grid.splice(y, 1);
+        this.grid.unshift(Array(COLS).fill(0));
       }
-    }
+    });
   }
 }
 

@@ -5,6 +5,7 @@ const ROWS = 20;
 const CELL_SIZE = 30;
 let requestId = null;
 let playBtn = document.getElementById("play-btn");
+
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
 context.canvas.height = ROWS * CELL_SIZE;
@@ -28,7 +29,6 @@ const play = () => {
   // performance.now() returns a timestamp in milliseconds
   time.start = performance.now();
   animate();
-
 };
 
 // This function will draw a random shape and grid lines
@@ -61,5 +61,4 @@ const animate = (now = 0) => {
   }
   draw();
   requestId = requestAnimationFrame(animate);
-  board.clearLines();
 };
