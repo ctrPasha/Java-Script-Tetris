@@ -61,4 +61,5 @@ const animate = (now = 0) => {
   }
   draw();
   requestId = requestAnimationFrame(animate);
+  board.clearLines();
 };

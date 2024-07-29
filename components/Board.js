@@ -105,6 +105,8 @@ class Board {
       this.piece = new Shapes(this.context);
     }
     console.table(this.grid);
+
+
   }
   // Draws the board with the tetraminos that land on the bottom
   draw() {
@@ -116,6 +118,27 @@ class Board {
         }
       });
     });
+  }
+
+  clearLines = () => {    
+    // Scans and deletes the row
+    for (let y = 0; y < ROWS; y++) {
+      for (let x = 0; x < COLS; x++ ) {
+        let completedLine = this.grid[y].every(value => value >= 1);
+        if (completedLine) {
+          for (let x = 0; x < COLS; x++) {
+            this.grid[y][x] = 0; // Set each element in the row to 0
+          }
+          // Shifts the entire board down by one
+          for (let y = ROWS - 1; y > 0; y--) {
+            for (let x = 0; x < COLS; x++) {
+              this.grid[y][x] = this.grid[y - 1][x];
+            }
+          }
+
+        }
+      }
+    }
   }
 }
 
