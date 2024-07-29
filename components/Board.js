@@ -128,12 +128,21 @@ class Board {
 
   clearLines() {
     // Scans and deletes the row
+    for (let y = 0; y < ROWS; y++) {
+      let completedRow = this.grid[y].every((value) => value > 0);
+      if (completedRow) {
+        this.grid.splice(y, 1);
+        this.grid.unshift(Array(COLS).fill(0));
+      }
+    }
+
+    /*
     this.grid.forEach((row, y) => {
       if (row.every((value) => value > 0)) {
         this.grid.splice(y, 1);
         this.grid.unshift(Array(COLS).fill(0));
       }
-    });
+    });*/
   }
 }
 
