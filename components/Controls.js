@@ -8,15 +8,16 @@ const KEY = {
 };
 Object.freeze(KEY);
 
-/* WASD values
+// WASD values
 const KEY2 = {
+  SPACE: 32,
   LEFT: 65,
   UP: 87,
   RIGHT: 68,
   DOWN: 83,
 };
 Object.freeze(KEY2);
-*/
+
 
 /* 
 To recieve the new state from the changed coordinates we use a spread operator ex: (...)
@@ -29,34 +30,33 @@ const keyMoves = {
   [KEY.DOWN]: (b) => ({ ...b, y: b.y + 1 }),
   [KEY.UP]: (b) => board.rotate(b),
   [KEY.SPACE]: (b) => ({ ...b, y: b.y + 1 }),
+
+  // WASD 
+  [KEY2.LEFT]: (b) => ({ ...b, x: b.x - 1 }),
+  [KEY2.RIGHT]: (b) => ({ ...b, x: b.x + 1 }),
+  [KEY2.DOWN]: (b) => ({ ...b, y: b.y + 1 }),
+  [KEY2.UP]: (b) => board.rotate(b),
+  [KEY2.SPACE]: (b) => ({ ...b, y: b.y + 1 })
 };
 
 const handleKeyPress = (event) => {
   if (keyMoves[event.keyCode]) {
-    let b = keyMoves[event.keyCode](board.shape);
-    //board.block.clear();
+    let b = keyMoves[event.keyCode](board.piece);
 
     if (event.keyCode === KEY.SPACE) {
       // Hard drop
       while (board.valid(b)) {
-        board.shape.move(b);
-        b = keyMoves[KEY.SPACE](board.shape);
+        board.piece.move(b);
+        b = keyMoves[KEY.SPACE](board.piece);
       }
     }
 
     if (board.valid(b)) {
-      board.shape.move(b);
-      board.shape.draw();
+      board.piece.move(b);
+      board.piece.draw();
     }
   }
 };
-
-const drop = () => {
-  let b = keyMoves[KEY.DOWN](board.shape);
-  if (board.valid(b)) {
-    board.shape.move(b);
-  }
-}
 
 const addingEventListener = () => {
   document.removeEventListener("keydown", handleKeyPress);

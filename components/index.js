@@ -28,19 +28,19 @@ const play = () => {
   // performance.now() returns a timestamp in milliseconds
   time.start = performance.now();
   animate();
-  console.table(board.grid);
+
 };
 
 // This function will draw a random shape and grid lines
 // Additonally, this function will update grid / color arrays
 const draw = () => {
   const { width, height } = context.canvas;
-
   context.clearRect(0, 0, canvas.width, canvas.height);
-
+  
   //This is what calls the block and color generation.
   drawGrid();
-  board.shape.draw();
+  board.piece.draw();
+  board.draw();
 };
 
 let time = {
@@ -50,7 +50,6 @@ let time = {
 };
 
 const animate = (now = 0) => {
-  const { width, height } = context.canvas;
   // Updates the elapsed time
   time.elapsed = now - time.start;
 
@@ -58,8 +57,7 @@ const animate = (now = 0) => {
   if (time.elapsed > time.level) {
     // Restarts counting from now
     time.start = now;
-    board.shape.clear();
-    drop();
+    board.drop();
   }
   draw();
   requestId = requestAnimationFrame(animate);

@@ -1,9 +1,10 @@
 class Shapes {
   constructor(context) {
-    const typeId = this.getRandomShape(COLORS.length);
+    const type = this.getRandomShape(BLOCKS.length);
     this.context = context;
-    this.shape = BLOCKS[typeId];
-    this.color = COLORS[typeId];
+    this.shape = BLOCKS[type];
+    this.color = COLORS[type];
+    this.index = type;
 
     // Starting position.  
     this.x = 3;  
@@ -23,16 +24,6 @@ class Shapes {
     });
   }
 
-  clear() {
-    this.shape.forEach((row, y) => {
-      row.forEach((value, x) => {
-        if (value > 0) {
-          //this.context.clearRect(this.x + x, this.y + y, 0, 0);
-        }
-      });
-    });
-  }
-  
   move(b) {
     this.x = b.x;
     this.y = b.y;
