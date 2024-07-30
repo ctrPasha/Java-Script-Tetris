@@ -14,17 +14,34 @@ class Shapes {
   // Updates color / grid array with new block.
   // Calls drawGrid() to update board
   draw() {
+    let lowestY = 0;
+    lowestY = board.lowestY();
+
+    // This section draws the drop shadow. I'm sure there is a way to combine the two draw loops to reduce redundancy.
+    // NOTE: Draw drop shadow before block in order to prevent the drop shadow from overlapping with the block when touching.
+    this.context.fillStyle = "grey";
+    this.shape.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value > 0) {
+          const margin = 0.05;
+          this.context.fillRect(this.x + x + margin, lowestY + y + margin, 1 - 2 * margin, 1 - 2 * margin);
+        }
+      });
+    });
+
     this.context.fillStyle = this.color;
     this.shape.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value > 0) {
           const margin = 0.05;
           this.context.fillRect(this.x + x + margin, this.y + y + margin, 1 - 2 * margin, 1 - 2 * margin);
+          
         }
       });
     });
+  
   }
-
+  
   move(b) {
     this.x = b.x;
     this.y = b.y;
@@ -36,3 +53,5 @@ class Shapes {
     return Math.floor(Math.random() * typesOf);
   } 
 };
+
+

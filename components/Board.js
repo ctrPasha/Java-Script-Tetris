@@ -114,6 +114,7 @@ class Board {
     console.table(this.grid);
     return true;
   }
+
   // Draws the board with the tetraminos that land on the bottom
   draw() {
     this.grid.forEach((row, y) => {
@@ -137,6 +138,16 @@ class Board {
       }
     }
   }
+
+  // Returns lowest valid y posisiton of the
+  lowestY() {
+    let b = { ...this.piece, y: this.piece.y };
+    while (this.valid(b)) {
+      b.y++;
+    }
+    return b.y - 1;
+  }
+
 }
 
 const drawGrid = () => {
