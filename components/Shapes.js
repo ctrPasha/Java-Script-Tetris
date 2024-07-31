@@ -19,6 +19,8 @@ class Shapes {
 
     // This section draws the drop shadow. I'm sure there is a way to combine the two draw loops to reduce redundancy.
     // NOTE: Draw drop shadow before block in order to prevent the drop shadow from overlapping with the block when touching.
+    // Draws ghost notes
+    this.context.globalAlpha = 0.5;
     this.context.fillStyle = "grey";
     this.shape.forEach((row, y) => {
       row.forEach((value, x) => {
@@ -29,6 +31,8 @@ class Shapes {
       });
     });
 
+    //Draws the tetraminos
+    this.context.globalAlpha = 1;
     this.context.fillStyle = this.color;
     this.shape.forEach((row, y) => {
       row.forEach((value, x) => {

@@ -3,7 +3,7 @@ const context = canvas.getContext('2d');
 const COLS = 10;
 const ROWS = 20;
 const CELL_SIZE = 30;
-let requestId = null;
+let request = null;
 let playBtn = document.getElementById("play-btn");
 
 // Setting canvas dimensions
@@ -23,8 +23,8 @@ const play = () => {
   playBtn.style.display = "none";
   
   // If an old game was already running than cancel the animation
-  if (requestId) {
-    cancelAnimationFrame(requestId);
+  if (request) {
+    cancelAnimationFrame(request);
   }
   // performance.now() returns a timestamp in milliseconds
   time.start = performance.now();
@@ -57,8 +57,23 @@ const animate = (now = 0) => {
   if (time.elapsed > time.level) {
     // Restarts counting from now
     time.start = now;
-    board.drop();
+
+    if (!board.drop()) {
+      gameOver();
+      return;
+    }
   }
   draw();
-  requestId = requestAnimationFrame(animate);
+  request = requestAnimationFrame(animate);
+};
+
+const gameOver = () => {
+  // When the game is over, clears the whole canvas
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  cancelAnimationFrame(request);
+  
+  playBtn.style.display = 'block';
+
+  console.log('Game Over screen displayed');
 };
