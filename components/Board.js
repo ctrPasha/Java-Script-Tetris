@@ -117,12 +117,15 @@ class Board {
 
   // Draws the board with the tetraminos that land on the bottom
   draw() {
+    this.context.strokeStyle = "black";
+    this.context.lineWidth = 0.025;
+    const margin = 0.08;
     this.grid.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value > 0) {
-          const margin = 0.05;
           this.context.fillStyle = COLORS[value - 1];
           this.context.fillRect(x + margin, y + margin, 1 - 2 * margin, 1 - 2 * margin);
+          this.context.strokeRect(x + margin + 0.05, y + margin + 0.05, 1 - 2 * margin - 0.1, 1 - 2 * margin - 0.1);
         }
       });
     });
