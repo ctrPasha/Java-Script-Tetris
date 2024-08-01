@@ -23,7 +23,7 @@ const play = () => {
   // On click, the button will disappear
   playBtn.style.display = "none";
   
-  // If an old game was already running than cancel the animation
+  // If an old game was already running then cancel the animation
   if (request) {
     cancelAnimationFrame(request);
   }
@@ -47,13 +47,12 @@ const draw = () => {
 let time = {
   start: 0,
   elapsed: 0,
-  level: DEFAULT_TIME,
+  level: DEFAULT_TIME
 };
 
 const animate = (now = 0) => {
   // Updates the elapsed time
   time.elapsed = now - time.start;
-
   // Checks if the elapsed time has passed the time for the current level
   if (time.elapsed > time.level) {
     // Restarts counting from now
@@ -61,9 +60,7 @@ const animate = (now = 0) => {
 
     if (!board.drop()) {
       gameOver();
-
-      // Resets time to default when game is over
-      time.level = DEFAULT_TIME;
+      resetGameStats();
       return;
     }
   }
@@ -78,6 +75,12 @@ const gameOver = () => {
   cancelAnimationFrame(request);
   
   playBtn.style.display = 'block';
-
-  console.log('Game Over screen displayed');
 };
+
+const resetGameStats = () => {
+  userStats.score = 0;
+  userStats.lines = 0;
+  userStats.level = 0;
+
+  time = {start: performance.now(), elapsed: 0, level: LEVEL[0]}
+}

@@ -39,7 +39,7 @@ const keyMoves = {
   [KEY2.SPACE]: (b) => ({ ...b, y: b.y + 1 })
 };
 
-const handleKeyPress = (event) => {
+const keyPress = (event) => {
   if (keyMoves[event.keyCode]) {
     let b = keyMoves[event.keyCode](board.piece);
 
@@ -49,6 +49,7 @@ const handleKeyPress = (event) => {
 
       // Hard drop
       while (board.valid(b)) {
+        userStats.score += SCORE.HARD_DROP;
         board.piece.move(b);
         b = keyMoves[KEY.SPACE](board.piece);
       }
@@ -56,14 +57,17 @@ const handleKeyPress = (event) => {
 
     if (board.valid(b)) {
       board.piece.move(b);
-      board.piece.draw();
+      if (event.keyCode === KEY.DOWN){
+        userStats.score += SCORE.SOFTDROP;
+      }
+      //board.piece.draw();
     }
   }
 };
 
 const addingEventListener = () => {
-  document.removeEventListener("keydown", handleKeyPress);
-  document.addEventListener("keydown", handleKeyPress);
+  document.removeEventListener("keydown", keyPress);
+  document.addEventListener("keydown", keyPress);
 };
 
 addingEventListener();

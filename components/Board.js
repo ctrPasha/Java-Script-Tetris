@@ -114,7 +114,7 @@ class Board {
       // Returns time to orignal state after rendering
       time.level = DEFAULT_TIME;
     }
-    console.table(this.grid);
+    //console.table(this.grid);
     return true;
   }
 
@@ -135,17 +135,47 @@ class Board {
   }
 
   clearLines() {
+    let lines = 0;
     // Scans and deletes the row
-    for (let y = 0; y < ROWS; y++) {
-      let completedRow = this.grid[y].every((value) => value > 0);
+    this.grid.forEach((row, y) => {
+      let completedRow = row.every((value) => value > 0);
       if (completedRow) {
+        lines++;
         this.grid.splice(y, 1);
         this.grid.unshift(Array(COLS).fill(0));
+
+        if (lines > 0) {
+          // Adds points if a line is cleared 
+          userStats.score += this.getScore(lines)
+          userStats.lines += lines;
+
+          // Checks if the amount of lines cleared is eligible for the next level
+          if (userStats.lines >= LINESPERLVL) {
+            // Increases the level
+            userStats.level++;
+            // Resets the count so that the next level can be reached
+
+            userStats.lines -= LINESPERLVL;
+            time.level = LEVEL[userStats.level];
+          }
+        }
       }
-    }
+    });
   }
 
-  // Returns lowest valid y posisiton of the
+  // Calculates the score based on the amount of lines cleared and the level the user is on
+  getScore(lines) {
+    const pointsPerLine = (
+      lines === 1 ? SCORE.ONE :
+      lines === 2 ? SCORE.TWO :
+      lines === 3 ? SCORE.THREE : 
+      lines === 4 ? SCORE.TETRIS :
+      0
+    );
+    return (userStats.level + 1) * pointsPerLine;
+  }
+
+  // Returns lowest valid y posisiton of the tetramino
   lowestY() {
     let b = { ...this.piece, y: this.piece.y };
     while (this.valid(b)) {
