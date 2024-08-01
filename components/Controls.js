@@ -44,6 +44,9 @@ const handleKeyPress = (event) => {
     let b = keyMoves[event.keyCode](board.piece);
 
     if (event.keyCode === KEY.SPACE) {
+      // Makes the timing loop instant
+      time.level = 0;
+
       // Hard drop
       while (board.valid(b)) {
         board.piece.move(b);

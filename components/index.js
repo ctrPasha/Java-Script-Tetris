@@ -2,7 +2,8 @@ const canvas = document.getElementById('board');
 const context = canvas.getContext('2d');
 const COLS = 10;
 const ROWS = 20;
-const CELL_SIZE = 30;
+const CELL_SIZE = 30; 
+const DEFAULT_TIME = 1000;
 let request = null;
 let playBtn = document.getElementById("play-btn");
 
@@ -46,7 +47,7 @@ const draw = () => {
 let time = {
   start: 0,
   elapsed: 0,
-  level: 1000,
+  level: DEFAULT_TIME,
 };
 
 const animate = (now = 0) => {
@@ -60,6 +61,9 @@ const animate = (now = 0) => {
 
     if (!board.drop()) {
       gameOver();
+
+      // Resets time to default when game is over
+      time.level = DEFAULT_TIME;
       return;
     }
   }

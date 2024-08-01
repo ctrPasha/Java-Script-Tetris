@@ -110,6 +110,9 @@ class Board {
         return false;
       }
       this.piece = new Shapes(this.context);
+      
+      // Returns time to orignal state after rendering
+      time.level = DEFAULT_TIME;
     }
     console.table(this.grid);
     return true;
