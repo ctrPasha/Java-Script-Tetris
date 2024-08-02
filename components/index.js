@@ -1,12 +1,12 @@
-const canvas = document.getElementById('board');
-const context = canvas.getContext('2d');
+const canvas = document.getElementById("board");
+const context = canvas.getContext("2d");
 const COLS = 10;
 const ROWS = 20;
-const CELL_SIZE = 30; 
+const CELL_SIZE = 30;
 const DEFAULT_TIME = 1000;
 let request = null;
 let playBtn = document.getElementById("play-btn");
-
+let isPaused = false;
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
 context.canvas.height = ROWS * CELL_SIZE;
@@ -16,13 +16,12 @@ context.scale(CELL_SIZE, CELL_SIZE);
 
 let board;
 
- 
 const play = () => {
-  board = new Board(context); 
- 
+  board = new Board(context);
+
   // On click, the button will disappear
   playBtn.style.display = "none";
-  
+
   // If an old game was already running then cancel the animation
   if (request) {
     cancelAnimationFrame(request);
@@ -37,7 +36,7 @@ const play = () => {
 const draw = () => {
   const { width, height } = context.canvas;
   context.clearRect(0, 0, canvas.width, canvas.height);
-  
+
   //This is what calls the block and color generation.
   drawGrid();
   board.piece.draw();
@@ -47,24 +46,27 @@ const draw = () => {
 let time = {
   start: 0,
   elapsed: 0,
-  level: DEFAULT_TIME
+  level: DEFAULT_TIME,
 };
 
 const animate = (now = 0) => {
-  // Updates the elapsed time
-  time.elapsed = now - time.start;
-  // Checks if the elapsed time has passed the time for the current level
-  if (time.elapsed > time.level) {
-    // Restarts counting from now
-    time.start = now;
+  if (isPaused) {
+    // Updates the elapsed time
+    time.elapsed = now - time.start;
+    // Checks if the elapsed time has passed the time for the current level
+    if (time.elapsed > time.level) {
+      // Restarts counting from now
+      time.start = now;
 
-    // If the board doesnt drop any blocks then game over 
-    if (!board.drop()) {
-      gameOver();
-      resetGameStats();
-      return;
+      // If the board doesnt drop any blocks then game over
+      if (!board.drop()) {
+        gameOver();
+        resetGameStats();
+        return;
+      }
     }
   }
+
   draw();
   request = requestAnimationFrame(animate);
 };
@@ -74,8 +76,8 @@ const gameOver = () => {
   context.clearRect(0, 0, canvas.width, canvas.height);
 
   cancelAnimationFrame(request);
-  
-  playBtn.style.display = 'block';
+
+  playBtn.style.display = "block";
 };
 
 const resetGameStats = () => {
@@ -83,5 +85,29 @@ const resetGameStats = () => {
   userStats.lines = 0;
   userStats.level = 0;
 
-  time = {start: performance.now(), elapsed: 0, level: LEVEL[0]}
-}
+  time = { start: performance.now(), elapsed: 0, level: LEVEL[0] };
+};
+
+const resume = () => {
+  if (isPaused) {
+    isPaused = false;
+    time.start = performance.now();
+    animate();
+    requestAnimationFrame(animate);
+  }
+};
+
+const pause = () => {
+  if (!isPaused) {
+    isPaused = true;
+    cancelAnimationFrame(request);
+  }
+};
+
+const togglePause = () => {
+  if (!isPaused) {
+    pause();
+  } else {
+    resume();
+  }
+};
