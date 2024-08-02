@@ -112,7 +112,7 @@ class Board {
       this.piece = new Shapes(this.context);
       
       // Returns time to orignal state after rendering
-      time.level = DEFAULT_TIME;
+      time.level = LEVEL[userStats.level];
     }
     //console.table(this.grid);
     return true;

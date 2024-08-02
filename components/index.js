@@ -58,6 +58,7 @@ const animate = (now = 0) => {
     // Restarts counting from now
     time.start = now;
 
+    // If the board doesnt drop any blocks then game over 
     if (!board.drop()) {
       gameOver();
       resetGameStats();
