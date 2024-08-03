@@ -18,10 +18,8 @@ let board;
 
 const play = () => {
   board = new Board(context);
-
   // On click, the button will disappear
   playBtn.style.display = "none";
-
   // If an old game was already running then cancel the animation
   if (request) {
     cancelAnimationFrame(request);
