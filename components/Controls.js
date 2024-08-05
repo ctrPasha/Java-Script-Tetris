@@ -76,5 +76,5 @@ const addingEventListener = () => {
   document.removeEventListener("keydown", keyPress);
   document.addEventListener("keydown", keyPress);
 };
-pause();
+//pause();
 addingEventListener();

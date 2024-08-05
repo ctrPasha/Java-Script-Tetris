@@ -8,13 +8,16 @@ let request = null;
 let playBtn = document.getElementById("play-btn");
 let menu = document.getElementById("menu-screen");
 let isPaused = false;
+
+
+
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
 context.canvas.height = ROWS * CELL_SIZE;
 
 // scaling the blocks
 context.scale(CELL_SIZE, CELL_SIZE);
-
+menu.style.display = "none";
 let board;
 const play = () => {
   board = new Board(context);
@@ -26,6 +29,7 @@ const play = () => {
   }
   // performance.now() returns a timestamp in milliseconds
   time.start = performance.now();
+  
   animate();
 };
 
@@ -48,7 +52,7 @@ let time = {
 };
 
 const animate = (now = 0) => {
-  if (isPaused) {
+  if (!isPaused) {
     // Updates the elapsed time
     time.elapsed = now - time.start;
     // Checks if the elapsed time has passed the time for the current level
@@ -56,7 +60,7 @@ const animate = (now = 0) => {
       // Restarts counting from now
       time.start = now;
 
-      // If the board doesnt drop any blocks then game over
+      // If the board cant drop any blocks then game over
       if (!board.drop()) {
         gameOver();
         resetGameStats();
@@ -90,9 +94,9 @@ const resume = () => {
   if (isPaused) {
     isPaused = false;
     time.start = performance.now();
-    menu.style.display = "block";
+    menu.style.display = "none";
     animate();
-    //requestAnimationFrame(animate);
+    console.log(isPaused)
   }
 };
 
@@ -100,7 +104,8 @@ const pause = () => {
   if (!isPaused) {
     isPaused = true;
     cancelAnimationFrame(request);
-    menu.style.display = "none";
+    menu.style.display = "block";
+    console.log(isPaused)
   }
 };
 
@@ -112,6 +117,16 @@ const togglePause = () => {
     pause();
   }
 };
+
+const quit = () => {
+ resetGameStats();
+ 
+ gameOver();
+ 
+ isPaused = false;
+
+ menu.style.display = "none"; 
+}
 
 
 
