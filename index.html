@@ -8,19 +8,14 @@
   </head>
   <body>
 
-    <div class="grid">
-      <h1>TETRIS</h1>
-      <canvas id="board" class="game-board"></canvas>
-      <div id="menu">
-        <button onclick="resume()"></button>
-      </div>
+  <div class="grid">
+    <h1>TETRIS</h1>
+    <canvas id="board" class="game-board"></canvas>
   </div>
-
+  
   <div id="next-container">
-    <div>
     <p>NEXT</p>
     <canvas id="nextBox"></canvas>
-    </div>
   </div>
 
   <div class="position-absolute top-0 end-0" id="stat-container">
@@ -43,6 +38,15 @@
   <div class="container d-flex align-items-center justify-content-center">
     <button onclick="play()" class="play-btn" id="play-btn">Play</button>
   </div>
+
+  <div class="container " id="menu-screen">
+    <p id="paused">PAUSED</p>
+    <div id="resume-back">
+      <button id="resume" onclick="togglePause()">Resume</button>
+    </div>
+  </div>
+
+
     <script src="./components/Points.js"></script>
     <script src="./components/index.js"></script>
     <script src="./components/Board.js"></script>

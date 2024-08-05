@@ -6,6 +6,7 @@ const CELL_SIZE = 30;
 const DEFAULT_TIME = 1000;
 let request = null;
 let playBtn = document.getElementById("play-btn");
+let menu = document.getElementById("menu-screen");
 let isPaused = false;
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
@@ -15,7 +16,6 @@ context.canvas.height = ROWS * CELL_SIZE;
 context.scale(CELL_SIZE, CELL_SIZE);
 
 let board;
-
 const play = () => {
   board = new Board(context);
   // On click, the button will disappear
@@ -90,8 +90,9 @@ const resume = () => {
   if (isPaused) {
     isPaused = false;
     time.start = performance.now();
+    menu.style.display = "block";
     animate();
-    requestAnimationFrame(animate);
+    //requestAnimationFrame(animate);
   }
 };
 
@@ -99,13 +100,18 @@ const pause = () => {
   if (!isPaused) {
     isPaused = true;
     cancelAnimationFrame(request);
+    menu.style.display = "none";
   }
 };
 
+
 const togglePause = () => {
-  if (!isPaused) {
-    pause();
-  } else {
+  if (isPaused) {
     resume();
+  } else {
+    pause();
   }
 };
+
+
+
