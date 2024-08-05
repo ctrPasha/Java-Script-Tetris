@@ -46,7 +46,7 @@ const keyPress = (event) => {
     return;
   }
 
-  if (isPaused) {
+  if (!isPaused) {
     if (keyMoves[event.keyCode]) {
       let b = keyMoves[event.keyCode](board.piece);
 
