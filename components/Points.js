@@ -14,28 +14,29 @@ const SCORE = {
 const LEVEL = {
   0: 800,
   1: 720,
-  3: 633,
-  4: 550,
-  5: 470,
-  6: 390,
-  7: 300,
-  8: 220,
-  9: 135,
-  10: 120,
+  2: 633, 
+  3: 550,
+  4: 470,
+  5: 390,
+  6: 300,
+  7: 220,
+  8: 135,
+  9: 120,
+  10: 100,
   11: 100,
-  12: 100,
+  12: 85,
   13: 85,
   14: 85,
-  15: 85,
+  15: 70,
   16: 70,
   17: 70,
-  18: 70,
+  18: 50,
   19: 50,
   20: 50,
   21: 50,
   22: 50,
   23: 50,
-  24: 50,
+  24: 35,
   25: 35,
   26: 35,
   27: 35,
@@ -63,7 +64,7 @@ const updateGameStats = (key, value) => {
 
 /*
 gameStats gets proxied
-it then updates the key of the target with a new value(gameStats)
+it then updates the key of the target with a new value
 */ 
  
 let userStats = new Proxy(gameStats, {

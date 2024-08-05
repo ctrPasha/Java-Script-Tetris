@@ -93,10 +93,9 @@ const resetGameStats = () => {
 const resume = () => {
   if (isPaused) {
     isPaused = false;
-    time.start = performance.now();
     menu.style.display = "none";
-    animate();
     console.log(isPaused)
+    animate();
   }
 };
 
