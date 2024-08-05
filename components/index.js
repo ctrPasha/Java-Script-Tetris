@@ -9,8 +9,6 @@ let playBtn = document.getElementById("play-btn");
 let menu = document.getElementById("menu-screen");
 let isPaused = false;
 
-
-
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
 context.canvas.height = ROWS * CELL_SIZE;
@@ -21,8 +19,10 @@ menu.style.display = "none";
 let board;
 const play = () => {
   board = new Board(context);
+
   // On click, the button will disappear
   playBtn.style.display = "none";
+  
   // If an old game was already running then cancel the animation
   if (request) {
     cancelAnimationFrame(request);

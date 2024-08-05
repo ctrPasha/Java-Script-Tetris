@@ -3,6 +3,9 @@ class Board {
     this.context = context;
     this.grid = this.getEmptyBoard();
     this.piece = new Shapes(context);
+
+    this.queue = [];
+    this.queueBlocks();
   }
   /* Array.from Creates an array with Rows number of elements(in this case 20 cells)
     The callback creates an array for the columns which then returns a 10x20 grid.
@@ -11,6 +14,16 @@ class Board {
   */
   getEmptyBoard() {
     return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+  }
+
+  queueBlocks() {
+    while (this.queue.length < 3) {
+      this.queue.push(new Shapes(this.context));
+    }
+    console.log(this.queue);
+  }
+  
+  updateNextBox() {
   }
 
   rotate(block) {
@@ -109,7 +122,9 @@ class Board {
       if (this.piece.y === 0) {
         return false;
       }
-      this.piece = new Shapes(this.context);
+      //this.piece = new Shapes(this.context);
+      this.piece = this.queue.shift();
+      this.queueBlocks();
       
       // Returns time to orignal state after rendering
       time.level = LEVEL[userStats.level];
