@@ -30,17 +30,22 @@ const togglePause = () => {
     pause();
   }
 };
-
+// If cancel is pressed, return to the menu.
 const cancel = () => {
   displayConfirm.style.display = "none";
   menu.style.display = "block";
 }
 
+// Shows the screen for confirming quit.
 const showQuit = () => {
   menu.style.display = "none";
   displayConfirm.style.display = "block";
 }
 
+/* 
+If user quits game, resets game stats, clears the board and displays the start
+button again. Also handles the game state, and hides interface.
+*/
 const quit = () => {
  resetGameStats();
  
