@@ -31,6 +31,16 @@ const togglePause = () => {
   }
 };
 
+const cancel = () => {
+  displayConfirm.style.display = "none";
+  menu.style.display = "block";
+}
+
+const showQuit = () => {
+  menu.style.display = "none";
+  displayConfirm.style.display = "block";
+}
+
 const quit = () => {
  resetGameStats();
  
@@ -38,5 +48,6 @@ const quit = () => {
  
  isPaused = false;
 
- menu.style.display = "none"; 
+ menu.style.display = "none";
+ displayConfirm.style.display = "none";
 }

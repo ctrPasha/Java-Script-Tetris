@@ -121,7 +121,7 @@
 }
 
 #resume {
-  margin-left: 3em;
+  margin-left: 2.5em;
   margin-top: 2em;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
@@ -133,6 +133,7 @@
   cursor: pointer;
   color: white;
   background-color: green;
+  width: 8em;
 }
 
 #paused {
@@ -144,7 +145,7 @@
 }
 
 #options {
-  margin-left: 3em;
+  margin-left: 2.5em;
   margin-top: 2em;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
@@ -160,7 +161,7 @@
 }
 
 #quit {
-  margin-left: 3em;
+  margin-left: 2.5em;
   margin-top: 2em;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
@@ -226,6 +227,7 @@
 
 #confirm {
   margin-top: 2em;
+  margin-left: 3.2em;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
   font-size: 1em;
@@ -241,6 +243,7 @@
 
 #cancel {
   margin-top: 2em;
+  margin-left: 3.2em;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
   font-size: 1em;
@@ -255,6 +258,7 @@
 }
 
 #confirm-screen p {
+  text-align: center;
   font-family: "Ubuntu";
   font-weight: 500;
   font-size: 1.5em;
