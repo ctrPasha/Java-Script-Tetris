@@ -6,8 +6,6 @@ const CELL_SIZE = 30;
 const DEFAULT_TIME = 1000;
 let request = null;
 let playBtn = document.getElementById("play-btn");
-let menu = document.getElementById("menu-screen");
-let isPaused = false;
 
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
@@ -90,42 +88,7 @@ const resetGameStats = () => {
   time = { start: performance.now(), elapsed: 0, level: LEVEL[0] };
 };
 
-const resume = () => {
-  if (isPaused) {
-    isPaused = false;
-    menu.style.display = "none";
-    console.log(isPaused)
-    animate();
-  }
-};
 
-const pause = () => {
-  if (!isPaused) {
-    isPaused = true;
-    cancelAnimationFrame(request);
-    menu.style.display = "block";
-    console.log(isPaused)
-  }
-};
-
-
-const togglePause = () => {
-  if (isPaused) {
-    resume();
-  } else {
-    pause();
-  }
-};
-
-const quit = () => {
- resetGameStats();
- 
- gameOver();
- 
- isPaused = false;
-
- menu.style.display = "none"; 
-}
 
 
 
