@@ -15,14 +15,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    
-    <div class="container-fluid" id="main-container">
+    <header>
       <h1>TETRIS</h1>
-      <div>
+    </header>
+
+    <div class="container-fluid" id="main-container">
+      
         <canvas id="board" class="game-board"></canvas>
         <button onclick="play()" class="play-btn" id="play-btn">Play</button>
-      </div>
+      
+      <div class="container-md" id="stat-container">
+        <p>SCORE</p>
+        <div id="scoreBox">
+          <span id="score">0</span>
+        </div>
 
+        <p>LEVEL</p>
+        <div id="lvlBox">
+          <span id="level">0</span>
+        </div>
+
+        <p>LINES</p>
+        <div id="lineBox">
+          <span id="lines">0</span>
+        </div>
+      </div>
+      
+        
+      
+      
+  
 
 
 
