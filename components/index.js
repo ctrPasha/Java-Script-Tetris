@@ -13,7 +13,7 @@ context.canvas.height = ROWS * CELL_SIZE;
 
 // scaling the blocks
 context.scale(CELL_SIZE, CELL_SIZE);
-menu.style.display = "none";
+//menu.style.display = "none";
 let board;
 const play = () => {
   board = new Board(context);

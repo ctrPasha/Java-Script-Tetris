@@ -2,7 +2,7 @@ let menu = document.getElementById("menu-screen");
 let displayConfirm = document.getElementById("confirm-screen");
 let isPaused = false;
 
-displayConfirm.style.display = "none";
+//displayConfirm.style.display = "none";
 
 const resume = () => {
   if (isPaused) {
