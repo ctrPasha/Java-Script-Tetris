@@ -22,9 +22,8 @@ class Board {
     }
     console.log(this.queue);
   }
-  
-  updateNextBox() {
-  }
+
+  updateNextBox() {}
 
   rotate(block) {
     let b = JSON.parse(JSON.stringify(block));
@@ -125,7 +124,7 @@ class Board {
       //this.piece = new Shapes(this.context);
       this.piece = this.queue.shift();
       this.queueBlocks();
-      
+
       // Returns time to orignal state after rendering
       time.level = LEVEL[userStats.level];
     }
@@ -142,8 +141,18 @@ class Board {
       row.forEach((value, x) => {
         if (value > 0) {
           this.context.fillStyle = COLORS[value - 1];
-          this.context.fillRect(x + margin, y + margin, 1 - 2 * margin, 1 - 2 * margin);
-          this.context.strokeRect(x + margin + 0.05, y + margin + 0.05, 1 - 2 * margin - 0.1, 1 - 2 * margin - 0.1);
+          this.context.fillRect(
+            x + margin,
+            y + margin,
+            1 - 2 * margin,
+            1 - 2 * margin
+          );
+          this.context.strokeRect(
+            x + margin + 0.05,
+            y + margin + 0.05,
+            1 - 2 * margin - 0.1,
+            1 - 2 * margin - 0.1
+          );
         }
       });
     });
@@ -160,8 +169,8 @@ class Board {
         this.grid.unshift(Array(COLS).fill(0));
 
         if (lines > 0) {
-          // Adds points if a line is cleared 
-          userStats.score += this.getScore(lines)
+          // Adds points if a line is cleared
+          userStats.score += this.getScore(lines);
           userStats.lines += lines;
 
           // Checks if the amount of lines cleared is eligible for the next level
@@ -180,13 +189,16 @@ class Board {
 
   // Calculates the score based on the amount of lines cleared and the level the user is on
   getScore(lines) {
-    const pointsPerLine = (
-      lines === 1 ? SCORE.ONE :
-      lines === 2 ? SCORE.TWO :
-      lines === 3 ? SCORE.THREE : 
-      lines === 4 ? SCORE.TETRIS :
-      0
-    );
+    const pointsPerLine =
+      lines === 1
+        ? SCORE.ONE
+        : lines === 2
+        ? SCORE.TWO
+        : lines === 3
+        ? SCORE.THREE
+        : lines === 4
+        ? SCORE.TETRIS
+        : 0;
     return (userStats.level + 1) * pointsPerLine;
   }
 
@@ -198,7 +210,6 @@ class Board {
     }
     return b.y - 1;
   }
-
 }
 
 const drawGrid = () => {

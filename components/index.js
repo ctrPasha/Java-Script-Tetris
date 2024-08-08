@@ -6,6 +6,12 @@ const CELL_SIZE = 30;
 const DEFAULT_TIME = 1000;
 let request = null;
 let playBtn = document.getElementById("play-btn");
+let pauseBtn = document.getElementById("pauseBox");
+let scoreBox = document.getElementById("score");
+let levelBox = document.getElementById("level");
+let linesBox = document.getElementById("lines");
+let board;
+let gameStarted = false;
 
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
@@ -13,21 +19,34 @@ context.canvas.height = ROWS * CELL_SIZE;
 
 // scaling the blocks
 context.scale(CELL_SIZE, CELL_SIZE);
-//menu.style.display = "none";
-let board;
+
+menu.style.display = "none";
+pauseBtn.style.display = "none";
+
+scoreBox.style.visibility = "hidden";
+levelBox.style.visibility = "hidden";
+linesBox.style.visibility = "hidden";
+
 const play = () => {
   board = new Board(context);
 
+  scoreBox.style.visibility = "visible";
+  levelBox.style.visibility = "visible";
+  linesBox.style.visibility = "visible";
+  pauseBtn.style.display = "flex";
+
   // On click, the button will disappear
   playBtn.style.display = "none";
-  
+
   // If an old game was already running then cancel the animation
   if (request) {
     cancelAnimationFrame(request);
   }
   // performance.now() returns a timestamp in milliseconds
   time.start = performance.now();
-  
+
+  gameStarted = true;
+
   animate();
 };
 
@@ -78,6 +97,12 @@ const gameOver = () => {
   cancelAnimationFrame(request);
 
   playBtn.style.display = "block";
+
+  gameStarted = false;
+  pauseBtn.style.display = "none";
+  scoreBox.style.visibility = "hidden";
+  levelBox.style.visibility = "hidden";
+  linesBox.style.visibility = "hidden";
 };
 
 const resetGameStats = () => {
@@ -87,8 +112,3 @@ const resetGameStats = () => {
 
   time = { start: performance.now(), elapsed: 0, level: LEVEL[0] };
 };
-
-
-
-
-

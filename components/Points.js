@@ -7,14 +7,14 @@ const SCORE = {
   THREE: 500,
   TETRIS: 800,
   SOFTDROP: 1,
-  HARD_DROP: 2
+  HARD_DROP: 2,
 };
 
 // Levels or speed(ms) of the game depending on the score
 const LEVEL = {
   0: 800,
   1: 720,
-  2: 633, 
+  2: 633,
   3: 550,
   4: 470,
   5: 390,
@@ -42,38 +42,35 @@ const LEVEL = {
   27: 35,
   28: 35,
   29: 35,
-  30: 20
+  30: 20,
 };
 
 let gameStats = {
   score: 0,
   level: 0,
-  lines: 0
+  lines: 0,
 };
 
 const updateGameStats = (key, value) => {
   // Retrives HTML content with the id that will match the key. for example: score, lines, level
- let update = document.getElementById(key);
+  let update = document.getElementById(key);
 
- // If the element exists, it updates the textContent of the key with the new value
+  // If the element exists, it updates the textContent of the key with the new value
   if (update) {
     update.textContent = value;
   }
 };
 
-
 /*
 gameStats gets proxied
 it then updates the key of the target with a new value
-*/ 
- 
+*/
+
 let userStats = new Proxy(gameStats, {
   set: (target, key, value) => {
-
     target[key] = value;
     updateGameStats(key, value);
     // Returns true if it was successful
-    return true; 
-  }
+    return true;
+  },
 });
- 

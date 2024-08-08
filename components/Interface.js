@@ -2,26 +2,24 @@ let menu = document.getElementById("menu-screen");
 let displayConfirm = document.getElementById("confirm-screen");
 let isPaused = false;
 
-//displayConfirm.style.display = "none";
-
+displayConfirm.style.display = "none";
 const resume = () => {
-  if (isPaused) {
+  if (isPaused && gameStarted) {
     isPaused = false;
     menu.style.display = "none";
-    console.log(isPaused)
+    console.log(isPaused);
     animate();
   }
 };
 
 const pause = () => {
-  if (!isPaused) {
+  if (!isPaused && gameStarted) {
     isPaused = true;
     cancelAnimationFrame(request);
     menu.style.display = "block";
-    console.log(isPaused)
+    console.log(isPaused);
   }
 };
-
 
 const togglePause = () => {
   if (isPaused) {
@@ -34,25 +32,25 @@ const togglePause = () => {
 const cancel = () => {
   displayConfirm.style.display = "none";
   menu.style.display = "block";
-}
+};
 
 // Shows the screen for confirming quit.
 const showQuit = () => {
   menu.style.display = "none";
   displayConfirm.style.display = "block";
-}
+};
 
 /* 
 If user quits game, resets game stats, clears the board and displays the start
 button again. Also handles the game state, and hides interface.
 */
 const quit = () => {
- resetGameStats();
- 
- gameOver();
- 
- isPaused = false;
+  resetGameStats();
 
- menu.style.display = "none";
- displayConfirm.style.display = "none";
-}
+  gameOver();
+
+  isPaused = false;
+
+  menu.style.display = "none";
+  displayConfirm.style.display = "none";
+};

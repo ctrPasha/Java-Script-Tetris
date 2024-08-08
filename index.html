@@ -13,6 +13,11 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
       rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./components/Points.js"></script>
+    <script src="./components/Board.js"></script>
+    <script src="./components/Shapes.js"></script>
+    <script src="./components/Controls.js"></script>
+    <script src="./components/Tetraminos.js"></script>
   </head>
   <body>
     <header>
@@ -20,11 +25,11 @@
     </header>
 
     <div class="container-fluid" id="main-container">
-      
-        <canvas id="board" class="game-board"></canvas>
-        <button onclick="play()" class="play-btn" id="play-btn">Play</button>
-      
-      <div class="container-md" id="stat-container">
+
+      <canvas id="board" class="game-board"></canvas>
+      <button onclick="play()" class="play-btn" id="play-btn">Play</button>
+
+      <div class="container" id="stat-container">
         <p>SCORE</p>
         <div id="scoreBox">
           <span id="score">0</span>
@@ -40,28 +45,38 @@
           <span id="lines">0</span>
         </div>
       </div>
-      
-        
-      
-      
-  
 
+      <div class="container-sm" id="pauseBox">
+        <button id="pauseBtn" onclick="togglePause()">
+          <i class="bi bi-pause-fill"></i>
+        </button>
+      </div>
 
+      <div class="container" id="menu-screen">
+        <p id="paused">PAUSED</p>
+        <button id="resume" onclick="togglePause()">RESUME</button>
+        <button id="options" onclick="options()">OPTIONS</button>
+        <button id="quit" onclick="showQuit()">QUIT</button>
+      </div>
 
+      <div class="confirm-container" id="confirm-screen">
+        <p>QUIT GAME?</p>
+        <button id="confirm" onclick="quit()">OK</button>
+        <button id="cancel" onclick="cancel()">CANCEL</button>
+      </div>
 
-
-
+      <div class="container" id="next-container">
+        <p>NEXT</p>
+        <canvas id="nextBox"></canvas>
+      </div>
 
     </div>
 
-
     <script src="./components/Interface.js"></script>
-    <script src="./components/Points.js"></script>
     <script src="./components/index.js"></script>
-    <script src="./components/Board.js"></script>
-    <script src="./components/Shapes.js"></script>
-    <script src="./components/Controls.js"></script>
-    <script src="./components/Tetraminos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
   </body>
 </html>

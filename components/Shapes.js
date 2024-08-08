@@ -52,7 +52,7 @@ class Shapes {
             1 - 2 * margin,
             1 - 2 * margin
           );
-          // Adds oputline to the tetraminos, giving it a better look 
+          // Adds oputline to the tetraminos, giving it a better look
           this.context.strokeRect(
             this.x + x + margin + 0.05,
             this.y + y + margin + 0.05,
