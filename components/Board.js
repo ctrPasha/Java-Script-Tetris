@@ -1,9 +1,9 @@
 class Board {
-  constructor(context) {
+  constructor(context, nextBlock) {
     this.context = context;
     this.grid = this.getEmptyBoard();
     this.piece = new Shapes(context);
-
+    this.nextBlock = nextBlock;
     this.queue = [];
     this.queueBlocks();
   }

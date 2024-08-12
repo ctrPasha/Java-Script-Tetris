@@ -1,34 +1,43 @@
 const canvas = document.getElementById("board");
+const canvasNext = document.getElementById("next-box");
 const context = canvas.getContext("2d");
+const nextBlock = canvasNext.getContext("2d");
 const COLS = 10;
 const ROWS = 20;
 const CELL_SIZE = 30;
 const DEFAULT_TIME = 1000;
+
+
 let request = null;
+let gameStarted = false;
+let board;
+
 let playBtn = document.getElementById("play-btn");
 let pauseBtn = document.getElementById("pauseBox");
 let scoreBox = document.getElementById("score");
 let levelBox = document.getElementById("level");
 let linesBox = document.getElementById("lines");
-let board;
-let gameStarted = false;
 
 // Setting canvas dimensions
 context.canvas.width = COLS * CELL_SIZE;
 context.canvas.height = ROWS * CELL_SIZE;
 
+// Setting dimensions of the next box
+nextBlock.canvas.width = 3 * CELL_SIZE;
+nextBlock.canvas.height = 3 * CELL_SIZE;
+
 // scaling the blocks
 context.scale(CELL_SIZE, CELL_SIZE);
+nextBlock.scale(CELL_SIZE, CELL_SIZE);
 
 menu.style.display = "none";
 pauseBtn.style.display = "none";
-
 scoreBox.style.visibility = "hidden";
 levelBox.style.visibility = "hidden";
 linesBox.style.visibility = "hidden";
 
 const play = () => {
-  board = new Board(context);
+  board = new Board(context, nextBlock);
 
   scoreBox.style.visibility = "visible";
   levelBox.style.visibility = "visible";
