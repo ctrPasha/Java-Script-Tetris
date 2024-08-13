@@ -7,7 +7,6 @@ const ROWS = 20;
 const CELL_SIZE = 30;
 const DEFAULT_TIME = 1000;
 
-
 let request = null;
 let gameStarted = false;
 let board;
@@ -23,12 +22,13 @@ context.canvas.width = COLS * CELL_SIZE;
 context.canvas.height = ROWS * CELL_SIZE;
 
 // Setting dimensions of the next box
-nextBlock.canvas.width = 3 * CELL_SIZE;
-nextBlock.canvas.height = 3 * CELL_SIZE;
+nextBlock.canvas.width = 4 * CELL_SIZE; // Maximum Possible Block Width is Four
+nextBlock.canvas.height = 12 * CELL_SIZE; // Maximum Possible Block Height is Four * Number of blocks in queue (3) 
+
 
 // scaling the blocks
 context.scale(CELL_SIZE, CELL_SIZE);
-nextBlock.scale(CELL_SIZE, CELL_SIZE);
+nextBlock.scale(CELL_SIZE , CELL_SIZE);
 
 menu.style.display = "none";
 pauseBtn.style.display = "none";
@@ -43,6 +43,7 @@ const play = () => {
   levelBox.style.visibility = "visible";
   linesBox.style.visibility = "visible";
   pauseBtn.style.display = "flex";
+  canvasNext.style.visibility = "visible";
 
   // On click, the button will disappear
   playBtn.style.display = "none";
@@ -112,6 +113,7 @@ const gameOver = () => {
   scoreBox.style.visibility = "hidden";
   levelBox.style.visibility = "hidden";
   linesBox.style.visibility = "hidden";
+  canvasNext.style.visibility ="hidden";
 };
 
 const resetGameStats = () => {

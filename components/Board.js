@@ -21,9 +21,40 @@ class Board {
       this.queue.push(new Shapes(this.context));
     }
     console.log(this.queue);
+    this.updateNextBox();
   }
 
-  updateNextBox() {}
+  updateNextBox() {
+    this.nextBlock.clearRect(0, 0, this.nextBlock.canvas.width, this.nextBlock.canvas.height);
+    const margin = 0.08;
+    
+    this.queue.forEach((block, index) => {
+      const offsetY = index * 4; // Adjust based on block size and spacing
+      this.nextBlock.fillStyle = block.color;
+      this.nextBlock.strokeStyle = "black";
+      this.nextBlock.lineWidth = 0.025;
+
+      block.shape.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value > 0) {
+            this.nextBlock.fillRect(
+              x + margin,
+              y + margin + offsetY,
+              1 - 2 * margin,
+              1 - 2 * margin
+            );
+            this.nextBlock.strokeRect(
+              x + margin + 0.05,
+              y + margin + 0.05 + offsetY,
+              1 - 2 * margin - 0.1,
+              1 - 2 * margin - 0.1
+            );
+          }
+        });
+      });
+    });
+
+  }
 
   rotate(block) {
     let b = JSON.parse(JSON.stringify(block));
