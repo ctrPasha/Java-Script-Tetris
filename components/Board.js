@@ -22,7 +22,7 @@ class Board {
   }
 
   queueBlocks() {
-    while (this.queue.length < 4) {
+    while (this.queue.length < 3) {
       this.queue.push(new Shapes(this.context));
     }
     console.log(this.queue);
