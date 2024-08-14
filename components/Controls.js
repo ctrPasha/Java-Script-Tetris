@@ -6,6 +6,7 @@ const KEY = {
   RIGHT: 39,
   DOWN: 40,
   ESC: 27,
+  HOLD: 70,
 };
 Object.freeze(KEY);
 
@@ -17,6 +18,7 @@ const KEY2 = {
   RIGHT: 68,
   DOWN: 83,
   ESC: 27,
+  HOLD: 70,
 };
 Object.freeze(KEY2);
 
@@ -38,6 +40,8 @@ const keyMoves = {
   [KEY2.DOWN]: (b) => ({ ...b, y: b.y + 1 }),
   [KEY2.UP]: (b) => board.rotate(b),
   [KEY2.SPACE]: (b) => ({ ...b, y: b.y + 1 }),
+
+  [KEY.HOLD]: (b) => board.holdBlock(),
 };
 
 const keyPress = (event) => {
@@ -62,7 +66,7 @@ const keyPress = (event) => {
         }
       }
 
-      if (board.valid(b)) {
+      if ((event.keyCode != KEY.HOLD) && board.valid(b)) {
         board.piece.move(b);
         if (event.keyCode === KEY.DOWN) {
           userStats.score += SCORE.SOFTDROP;

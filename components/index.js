@@ -2,6 +2,7 @@ const canvas = document.getElementById("board");
 const canvasNext = document.getElementById("next-box");
 const context = canvas.getContext("2d");
 const nextBlock = canvasNext.getContext("2d");
+
 const COLS = 10;
 const ROWS = 20;
 const CELL_SIZE = 30;
@@ -25,10 +26,16 @@ context.canvas.height = ROWS * CELL_SIZE;
 nextBlock.canvas.width = 4 * CELL_SIZE; // Maximum Possible Block Width is Four
 nextBlock.canvas.height = 12 * CELL_SIZE; // Maximum Possible Block Height is Four * Number of blocks in queue (3) 
 
+// NEW HOLD CONTAINER (SEPRATED SO YOU CAN SEE IT)
+const canvasHold = document.getElementById('hold-block');
+const holdBlock = canvasHold.getContext("2d");
+holdBlock.canvas.width = 4 * CELL_SIZE;
+holdBlock.canvas.height = 4 * CELL_SIZE;
 
 // scaling the blocks
 context.scale(CELL_SIZE, CELL_SIZE);
 nextBlock.scale(CELL_SIZE , CELL_SIZE);
+holdBlock.scale(CELL_SIZE, CELL_SIZE);
 
 menu.style.display = "none";
 pauseBtn.style.display = "none";
@@ -43,7 +50,6 @@ const play = () => {
   levelBox.style.visibility = "visible";
   linesBox.style.visibility = "visible";
   pauseBtn.style.display = "flex";
-  canvasNext.style.visibility = "visible";
 
   // On click, the button will disappear
   playBtn.style.display = "none";
@@ -113,7 +119,9 @@ const gameOver = () => {
   scoreBox.style.visibility = "hidden";
   levelBox.style.visibility = "hidden";
   linesBox.style.visibility = "hidden";
+
   canvasNext.style.visibility ="hidden";
+  canvasHold.style.visibility = "hidden";
 };
 
 const resetGameStats = () => {

@@ -4,9 +4,14 @@ class Board {
     this.grid = this.getEmptyBoard();
     this.piece = new Shapes(context);
     this.nextBlock = nextBlock;
+    this.holdBlockUI = holdBlock;
     this.queue = [];
     this.queueBlocks();
+    this.isHoldingPiece = false;
+    this.hasDroppedPiece = false;
+    this.holdPiece = [];
   }
+
   /* Array.from Creates an array with Rows number of elements(in this case 20 cells)
     The callback creates an array for the columns which then returns a 10x20 grid.
     The array is filled with 0's. In short all this is doing is creating a 2D array/grid
@@ -17,7 +22,7 @@ class Board {
   }
 
   queueBlocks() {
-    while (this.queue.length < 3) {
+    while (this.queue.length < 4) {
       this.queue.push(new Shapes(this.context));
     }
     console.log(this.queue);
@@ -55,6 +60,49 @@ class Board {
     });
 
   }
+
+  holdBlock() {  
+    if (this.isHoldingPiece == false && this.hasDroppedPiece == false) {
+      this.holdBlock[0] = this.piece;
+      this.piece = this.queue.shift();
+      this.queueBlocks();
+  
+      this.isHoldingPiece = true; // Set this to true after holding a piece
+      this.hasDroppedPiece = true;
+    } else if (this.isHoldingPiece && this.hasDroppedPiece == false) {
+
+      let tempPiece = this.piece;
+      this.piece = this.holdBlock[0];
+      this.holdBlock[0] = tempPiece;
+      this.hasDroppedPiece = true;  
+    }
+
+    const margin = 0.08;
+    this.holdBlockUI.clearRect(0, 0, this.holdBlockUI.canvas.width, this.holdBlockUI.canvas.height);
+    this.holdBlockUI.fillStyle = this.holdBlock[0].color;
+    this.holdBlockUI.strokeStyle = "black";
+    this.holdBlockUI.lineWidth = 0.025;
+    this.holdBlock[0].shape.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value > 0) {
+          this.holdBlockUI.fillRect(
+            x + margin,
+            y + margin,
+            1 - 2 * margin,
+            1 - 2 * margin
+          );
+          this.holdBlockUI.strokeRect(
+            x + margin + 0.05,
+            y + margin + 0.05,
+            1 - 2 * margin - 0.1,
+            1 - 2 * margin - 0.1
+          );
+        }
+      });
+    });
+  }
+
+
 
   rotate(block) {
     let b = JSON.parse(JSON.stringify(block));
@@ -155,6 +203,7 @@ class Board {
       //this.piece = new Shapes(this.context);
       this.piece = this.queue.shift();
       this.queueBlocks();
+      this.hasDroppedPiece = false;
 
       // Returns time to orignal state after rendering
       time.level = LEVEL[userStats.level];
