@@ -2,6 +2,8 @@ const canvas = document.getElementById("board");
 const canvasNext = document.getElementById("next-box");
 const context = canvas.getContext("2d");
 const nextBlock = canvasNext.getContext("2d");
+const canvasHold = document.getElementById('hold-block');
+const holdBlock = canvasHold.getContext("2d");
 
 const COLS = 10;
 const ROWS = 20;
@@ -23,12 +25,10 @@ context.canvas.width = COLS * CELL_SIZE;
 context.canvas.height = ROWS * CELL_SIZE;
 
 // Setting dimensions of the next box
-nextBlock.canvas.width = 4 * CELL_SIZE; // Maximum Possible Block Width is Four
-nextBlock.canvas.height = 12 * CELL_SIZE; // Maximum Possible Block Height is Four * Number of blocks in queue (3) 
+nextBlock.canvas.width = 4 * CELL_SIZE;
+nextBlock.canvas.height = 4 * CELL_SIZE; 
 
 // NEW HOLD CONTAINER (SEPRATED SO YOU CAN SEE IT)
-const canvasHold = document.getElementById('hold-block');
-const holdBlock = canvasHold.getContext("2d");
 holdBlock.canvas.width = 4 * CELL_SIZE;
 holdBlock.canvas.height = 4 * CELL_SIZE;
 

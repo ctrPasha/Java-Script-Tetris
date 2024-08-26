@@ -173,18 +173,16 @@ header {
 }
 
 #next-container {
-  display: grid;
-  grid-area: next;
   position: absolute;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18em;
+  margin-bottom: 25em;
   margin-left: 35rem;
   background-color: #000;
   border-radius: 20px;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px;
-  height: 18rem;
+  height: 11rem;
   width: 12em;
 }
 
@@ -194,12 +192,12 @@ header {
 }
 
 #next-box {
-  padding: 10px;
+  padding: 5px;
   margin-bottom: 2rem;
   background-color: #141414;
   border-radius: 10px;
-  height: 15em;
-  width: 10em;
+  height: 120px;
+  width: 120px;
 }
 
 #hold-container {

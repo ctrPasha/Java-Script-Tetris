@@ -34,7 +34,7 @@ class Board {
     const margin = 0.08;
     
     this.queue.forEach((block, index) => {
-      const offsetY = index * 4; // Adjust based on block size and spacing
+      const offsetY = index * 4;
       this.nextBlock.fillStyle = block.color;
       this.nextBlock.strokeStyle = "black";
       this.nextBlock.lineWidth = 0.025;
@@ -67,7 +67,7 @@ class Board {
       this.piece = this.queue.shift();
       this.queueBlocks();
   
-      this.isHoldingPiece = true; // Set this to true after holding a piece
+      this.isHoldingPiece = true; 
       this.hasDroppedPiece = true;
     } else if (this.isHoldingPiece && this.hasDroppedPiece == false) {
 
@@ -101,8 +101,6 @@ class Board {
       });
     });
   }
-
-
 
   rotate(block) {
     let b = JSON.parse(JSON.stringify(block));
