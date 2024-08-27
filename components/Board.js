@@ -10,6 +10,7 @@ class Board {
     this.isHoldingPiece = false;
     this.hasDroppedPiece = false;
     this.holdPiece = [];
+    this.blockTypeDisplacement(this.queue[0])
   }
 
   /* Array.from Creates an array with Rows number of elements(in this case 20 cells)
@@ -29,12 +30,45 @@ class Board {
     this.updateNextBox();
   }
 
+  // Manual X / Y Adjustments for Block Rendering
+  blockTypeDisplacement(block) {
+    switch (block.index) {
+        case 0:
+            // I Shape
+            return [-1.5, 0];
+        case 1:
+            // J Shape
+            return [-1, 0.5];
+        case 2:
+            // L Shape
+            return [0, 0.5];
+        case 3:
+            // O Shape
+            return [0, 1];
+        case 4:
+            // S Shape
+            return [-0.5, 0];
+        case 5:
+            // Z Shape
+            return [-0.5, 0];
+          case 6:
+            // T Shape
+            return [-0.5, 1];
+        default:
+            return [0, 0];
+        }
+    }
+
   updateNextBox() {
     this.nextBlock.clearRect(0, 0, this.nextBlock.canvas.width, this.nextBlock.canvas.height);
     const margin = 0.08;
-    
+
+    // Retrieves Corresponding Block Displacement
+    let [displacementX, displacementY] = this.blockTypeDisplacement(this.queue[0]);
+
     this.queue.forEach((block, index) => {
-      const offsetY = index * 4;
+      const offsetY = index * 4 + displacementY;
+      const offsetX = 1 + displacementX;
       this.nextBlock.fillStyle = block.color;
       this.nextBlock.strokeStyle = "black";
       this.nextBlock.lineWidth = 0.025;
@@ -43,13 +77,13 @@ class Board {
         row.forEach((value, x) => {
           if (value > 0) {
             this.nextBlock.fillRect(
-              x + margin,
+              x + margin + offsetX,
               y + margin + offsetY,
               1 - 2 * margin,
               1 - 2 * margin
             );
             this.nextBlock.strokeRect(
-              x + margin + 0.05,
+              x + margin + 0.05 + offsetX,
               y + margin + 0.05 + offsetY,
               1 - 2 * margin - 0.1,
               1 - 2 * margin - 0.1
@@ -61,7 +95,7 @@ class Board {
 
   }
 
-  holdBlock() {  
+  holdBlock() {
     if (this.isHoldingPiece == false && this.hasDroppedPiece == false) {
       this.holdBlock[0] = this.piece;
       this.piece = this.queue.shift();
@@ -77,6 +111,12 @@ class Board {
       this.hasDroppedPiece = true;  
     }
 
+    // FIXME: Uncomment Code and Delete Lines 117 & 118 Once Canvas Rendering is Fixed
+    // Retrieves Corresponding Block Displacement
+    // let [displacementX, displacementY] = this.blockTypeDisplacement(this.holdBlock[0]);
+    let displacementX = 0;
+    let displacementY = 0;
+
     const margin = 0.08;
     this.holdBlockUI.clearRect(0, 0, this.holdBlockUI.canvas.width, this.holdBlockUI.canvas.height);
     this.holdBlockUI.fillStyle = this.holdBlock[0].color;
@@ -86,14 +126,14 @@ class Board {
       row.forEach((value, x) => {
         if (value > 0) {
           this.holdBlockUI.fillRect(
-            x + margin,
-            y + margin,
+            x + margin + displacementX,
+            y + margin + displacementY,
             1 - 2 * margin,
             1 - 2 * margin
           );
           this.holdBlockUI.strokeRect(
-            x + margin + 0.05,
-            y + margin + 0.05,
+            x + margin + 0.05 + displacementX,
+            y + margin + 0.05 + displacementY,
             1 - 2 * margin - 0.1,
             1 - 2 * margin - 0.1
           );

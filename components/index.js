@@ -85,6 +85,10 @@ let time = {
 };
 
 const animate = (now = 0) => {
+  // Make Visible Hold / Next Container when Game Starts
+  canvasNext.style.visibility ="visible";
+  canvasHold.style.visibility = "visible";
+
   if (!isPaused) {
     // Updates the elapsed time
     time.elapsed = now - time.start;
